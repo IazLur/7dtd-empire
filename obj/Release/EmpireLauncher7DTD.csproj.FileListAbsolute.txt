@@ -14,3 +14,4 @@ C:\Users\drago\source\repos\EmpireLauncher7DTD\obj\Release\EmpireLauncher7DTD.ex
 C:\Users\drago\source\repos\EmpireLauncher7DTD\obj\Release\EmpireLauncher7DTD.application
 C:\Users\drago\source\repos\EmpireLauncher7DTD\obj\Release\EmpireLauncher7DTD.exe
 C:\Users\drago\source\repos\EmpireLauncher7DTD\obj\Release\EmpireLauncher7DTD.pdb
+C:\Users\drago\source\repos\EmpireLauncher7DTD\obj\Release\EmpireLauncher7DTD.csprojAssemblyReference.cache

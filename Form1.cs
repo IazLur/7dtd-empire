@@ -35,6 +35,18 @@ namespace EmpireLauncher7DTD
             button2.Parent = pictureBox1;
             button3.Parent = pictureBox1;
             label1.BackColor = Color.Transparent;
+
+            if(!File.Exists(Directory.GetCurrentDirectory() + "\\7DaysToDie_EAC.exe"))
+            {
+                MessageBox.Show("Pour un lancement plus rapide, mettez le launcher dans le dossier d'installation du jeu.", "Important", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            else
+            {
+                dossier.SelectedPath = Directory.GetCurrentDirectory();
+                ExecuteDownload();
+                Process.Start(Directory.GetCurrentDirectory() + "\\7DaysToDie_EAC.exe");
+                Application.Exit();
+            }
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -42,9 +54,32 @@ namespace EmpireLauncher7DTD
             MessageBox.Show("Veuillez sélectionner le dossier d'installation de 7 days to die.", "Important", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             dossier.ShowDialog();
 
+            ExecuteDownload();
+        }
+
+        private void button3_Click_1(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+
+        private void button2_Click_1(object sender, EventArgs e)
+        {
+            if (dossier.SelectedPath != "")
+            {
+                Process.Start(path + "..\\" + "7DaysToDie_EAC.exe");
+            }
+            else
+            {
+                MessageBox.Show("Vous devez d'abord choisir dans quel dossier votre jeu est installé.", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void ExecuteDownload()
+        {
             path = dossier.SelectedPath;
 
-            if (path.Contains("common")) {
+            if (path.Contains("common"))
+            {
 
                 if (!Directory.Exists(path + "\\mods"))
                 {
@@ -84,25 +119,10 @@ namespace EmpireLauncher7DTD
                 ftpResponseList = File.ReadAllText(path + "mdp.txt");
 
                 MessageBox.Show("Le mot de passe pour se connecter au serveur : " + ftpResponseList, "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            } else {
-                MessageBox.Show("Le jeu doit se trouver dans le répertoire de 'common' de Steam.", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
-        }
-
-        private void button3_Click_1(object sender, EventArgs e)
-        {
-            Application.Exit();
-        }
-
-        private void button2_Click_1(object sender, EventArgs e)
-        {
-            if (dossier.SelectedPath != "")
-            {
-                Process.Start(path + "..\\" + "7DaysToDie_EAC.exe");
             }
             else
             {
-                MessageBox.Show("Vous devez d'abord choisir dans quel dossier votre jeu est installé.", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Le jeu doit se trouver dans le répertoire de 'common' de Steam.", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
     }
