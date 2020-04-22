@@ -1,0 +1,16 @@
+C:\Users\drago\Desktop\TEST_BONHOMME\EmpireLauncher7DTD.exe.config
+C:\Users\drago\Desktop\TEST_BONHOMME\EmpireLauncher7DTD.exe.manifest
+C:\Users\drago\Desktop\TEST_BONHOMME\EmpireLauncher7DTD.application
+C:\Users\drago\Desktop\TEST_BONHOMME\EmpireLauncher7DTD.exe
+C:\Users\drago\Desktop\TEST_BONHOMME\EmpireLauncher7DTD.pdb
+C:\Users\drago\Desktop\TEST_BONHOMME\EmpireLauncher7DTD.exe.CodeAnalysisLog.xml
+C:\Users\drago\Desktop\TEST_BONHOMME\EmpireLauncher7DTD.exe.lastcodeanalysissucceeded
+C:\Users\drago\source\repos\EmpireLauncher7DTD\obj\Release\EmpireLauncher7DTD.LauncherEmpire.resources
+C:\Users\drago\source\repos\EmpireLauncher7DTD\obj\Release\EmpireLauncher7DTD.Properties.Resources.resources
+C:\Users\drago\source\repos\EmpireLauncher7DTD\obj\Release\EmpireLauncher7DTD.csproj.GenerateResource.cache
+C:\Users\drago\source\repos\EmpireLauncher7DTD\obj\Release\EmpireLauncher7DTD.csproj.CoreCompileInputs.cache
+C:\Users\drago\source\repos\EmpireLauncher7DTD\obj\Release\EmpireLauncher7DTD.TrustInfo.xml
+C:\Users\drago\source\repos\EmpireLauncher7DTD\obj\Release\EmpireLauncher7DTD.exe.manifest
+C:\Users\drago\source\repos\EmpireLauncher7DTD\obj\Release\EmpireLauncher7DTD.application
+C:\Users\drago\source\repos\EmpireLauncher7DTD\obj\Release\EmpireLauncher7DTD.exe
+C:\Users\drago\source\repos\EmpireLauncher7DTD\obj\Release\EmpireLauncher7DTD.pdb
