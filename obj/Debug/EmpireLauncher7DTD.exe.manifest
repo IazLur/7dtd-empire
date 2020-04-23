@@ -43,14 +43,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="EmpireLauncher7DTD.exe" size="1018336">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="EmpireLauncher7DTD.exe" size="1027040">
       <assemblyIdentity name="EmpireLauncher7DTD" version="1.0.0.6" publicKeyToken="8852C35007A6D14F" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>qGJ/1nXOhnc5drIM7oJtnWVgMRlNub2VNc0ix+KPdgU=</dsig:DigestValue>
+        <dsig:DigestValue>UCL3iAQOZMwqjmNZ/5dDG78nlM3M6ZMMWg60tOaDFPo=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

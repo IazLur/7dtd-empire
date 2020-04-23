@@ -79,5 +79,15 @@ namespace EmpireLauncher7DTD.Properties {
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Screenshot_2 {
+            get {
+                object obj = ResourceManager.GetObject("Screenshot_2", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
     }
 }

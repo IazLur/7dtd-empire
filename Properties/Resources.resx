@@ -124,4 +124,7 @@
   <data name="apps.21205.69802328231064156.03ff84cc-b6b1-4226-8e6c-545d183e5fbf" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\apps.21205.69802328231064156.03ff84cc-b6b1-4226-8e6c-545d183e5fbf.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="Screenshot_2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Screenshot_2.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
 </root>

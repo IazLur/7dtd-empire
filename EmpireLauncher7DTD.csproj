@@ -18,6 +18,8 @@
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
     <IsWebBootstrapper>false</IsWebBootstrapper>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
     <PublishUrl>C:\Users\drago\Desktop\Nouveau dossier\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
@@ -33,8 +35,6 @@
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
     <BootstrapperEnabled>true</BootstrapperEnabled>
-    <NuGetPackageImportStamp>
-    </NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -145,6 +145,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="01840052e8bc61931392423adcd4912262b2ce54.ico" />
+    <None Include="Resources\Screenshot_2.jpg" />
     <None Include="Resources\apps.21205.69802328231064156.03ff84cc-b6b1-4226-8e6c-545d183e5fbf.jpg" />
     <None Include="Resources\94-940164_button-images-png-button-background-image-green-transparent.png" />
   </ItemGroup>
