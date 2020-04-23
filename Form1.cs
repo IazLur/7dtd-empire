@@ -36,6 +36,26 @@ namespace EmpireLauncher7DTD
             percLabel.Parent = pictureBox1;
             label1.BackColor = Color.Transparent;
 
+            if (Directory.Exists(Directory.GetCurrentDirectory() + "\\mods") && 
+                File.Exists(Directory.GetCurrentDirectory() + "\\mods\\mdp.txt"))
+            {
+                string pass = File.ReadAllText(Directory.GetCurrentDirectory() + "\\mods\\mdp.txt");
+
+                using (var client = new WebClient())
+                {
+                    client.DownloadFile("http://iazlur.fr/mdp.txt", Directory.GetCurrentDirectory() + "\\mods\\temp.txt");
+                }
+
+                string pass2 = File.ReadAllText(Directory.GetCurrentDirectory() + "\\mods\\temp.txt");
+
+                if (pass == pass2)
+                {
+                    Process.Start(Directory.GetCurrentDirectory() + "\\7DaysToDie_EAC.exe");
+                    Application.Exit();
+                    return; 
+                }
+            } 
+
             if (!File.Exists(Directory.GetCurrentDirectory() + "\\7DaysToDie_EAC.exe"))
             {
                 Verify();
