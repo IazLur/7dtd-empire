@@ -11,14 +11,13 @@ using System.IO;
 using System.IO.Compression;
 using System.Net;
 using System.Diagnostics;
+using System.Security.Cryptography.X509Certificates;
 
 namespace EmpireLauncher7DTD
 {
     public partial class LauncherEmpire : Form
     {
         public string path = "";
-        public FtpWebRequest ftpRequest;
-        public FtpWebResponse ftpResponse;
         public string ftpResponseList;
         public Stream responseStream;
         public StreamReader responseStreamReader;
@@ -36,7 +35,7 @@ namespace EmpireLauncher7DTD
             button3.Parent = pictureBox1;
             label1.BackColor = Color.Transparent;
 
-            if(!File.Exists(Directory.GetCurrentDirectory() + "\\7DaysToDie_EAC.exe"))
+            if (!File.Exists(Directory.GetCurrentDirectory() + "\\7DaysToDie_EAC.exe"))
             {
                 MessageBox.Show("Pour un lancement plus rapide, mettez le launcher dans le dossier d'installation du jeu.", "Important", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
@@ -95,26 +94,14 @@ namespace EmpireLauncher7DTD
                 }
                 Directory.CreateDirectory(path + "..\\mods");
 
-                ftpRequest = (FtpWebRequest)WebRequest.Create("ftp://176.165.0.32/mods.zip");
-                ftpRequest.Method = WebRequestMethods.Ftp.DownloadFile;
-                ftpRequest.Credentials = new NetworkCredential("mods", "charcuterie");
-
-                ftpResponse = (FtpWebResponse)ftpRequest.GetResponse();
-
-                Stream responseStream = ftpResponse.GetResponseStream();
-                StreamReader responseStreamReader = new StreamReader(responseStream);
-
-                using (var outputFile = File.Create(path + "mods.zip"))
+                using (var client = new WebClient())
                 {
-                    responseStream.CopyTo(outputFile);
+                    client.DownloadFile("http://iazlur.fr/mods.zip", path + "mods.zip");
                 }
 
                 ZipFile.ExtractToDirectory(path + "mods.zip", path);
 
                 File.Delete(path + "mods.zip");
-
-                responseStream.Close();
-                responseStreamReader.Close();
 
                 ftpResponseList = File.ReadAllText(path + "mdp.txt");
 
