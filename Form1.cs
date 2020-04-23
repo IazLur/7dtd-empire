@@ -21,6 +21,8 @@ namespace EmpireLauncher7DTD
         public string ftpResponseList;
         public Stream responseStream;
         public StreamReader responseStreamReader;
+        public Stopwatch sw = new Stopwatch();
+        public string urlAddress = "http://iazlur.fr/mods.zip";
 
         public LauncherEmpire()
         {
@@ -30,47 +32,42 @@ namespace EmpireLauncher7DTD
         private void LauncherEmpire_Load(object sender, EventArgs e)
         {
             label1.Parent = pictureBox1;
-            button1.Parent = pictureBox1;
-            button2.Parent = pictureBox1;
-            button3.Parent = pictureBox1;
+            downloadLabel.Parent = pictureBox1;
+            percLabel.Parent = pictureBox1;
             label1.BackColor = Color.Transparent;
 
             if (!File.Exists(Directory.GetCurrentDirectory() + "\\7DaysToDie_EAC.exe"))
             {
-                MessageBox.Show("Pour un lancement plus rapide, mettez le launcher dans le dossier d'installation du jeu.", "Important", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                Verify();
+                ExecuteDownload();
             }
             else
             {
                 dossier.SelectedPath = Directory.GetCurrentDirectory();
                 ExecuteDownload();
-                Process.Start(Directory.GetCurrentDirectory() + "\\7DaysToDie_EAC.exe");
-                Application.Exit();
             }
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void Verify()
         {
-            MessageBox.Show("Veuillez sélectionner le dossier d'installation de 7 days to die.", "Important", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            dossier.ShowDialog();
+            MessageBox.Show("Pour un lancement plus rapide, mettez le launcher dans le dossier d'installation du jeu.", "Important", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            SelectPath();
 
-            ExecuteDownload();
-        }
-
-        private void button3_Click_1(object sender, EventArgs e)
-        {
-            Application.Exit();
-        }
-
-        private void button2_Click_1(object sender, EventArgs e)
-        {
-            if (dossier.SelectedPath != "")
+            if (File.Exists(dossier.SelectedPath + "\\7DaysToDie_EAC.exe"))
             {
-                Process.Start(path + "..\\" + "7DaysToDie_EAC.exe");
+                return;
             }
             else
             {
                 MessageBox.Show("Vous devez d'abord choisir dans quel dossier votre jeu est installé.", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Verify();
             }
+        }
+
+        private void SelectPath()
+        {
+            MessageBox.Show("Veuillez sélectionner le dossier d'installation de 7 days to die.", "Important", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            dossier.ShowDialog();
         }
 
         private void ExecuteDownload()
@@ -94,23 +91,72 @@ namespace EmpireLauncher7DTD
                 }
                 Directory.CreateDirectory(path + "..\\mods");
 
-                using (var client = new WebClient())
+                using (var webClient = new WebClient())
                 {
-                    client.DownloadFile("http://iazlur.fr/mods.zip", path + "mods.zip");
+                    webClient.DownloadFileCompleted += new AsyncCompletedEventHandler(Completed);
+                    webClient.DownloadProgressChanged += new DownloadProgressChangedEventHandler(ProgressChanged);
+
+                    Uri URL = urlAddress.StartsWith("http://", StringComparison.OrdinalIgnoreCase) ? new Uri(urlAddress) : new Uri("http://" + urlAddress);
+
+                    sw.Start();
+
+                    try
+                    {
+                        webClient.DownloadFileAsync(URL, path + "mods.zip");
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.Message);
+                    }
                 }
 
-                ZipFile.ExtractToDirectory(path + "mods.zip", path);
-
-                File.Delete(path + "mods.zip");
-
-                ftpResponseList = File.ReadAllText(path + "mdp.txt");
-
-                MessageBox.Show("Le mot de passe pour se connecter au serveur : " + ftpResponseList, "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             else
             {
                 MessageBox.Show("Le jeu doit se trouver dans le répertoire de 'common' de Steam.", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
+        }
+
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        // The event that will fire whenever the progress of the WebClient is changed
+        private void ProgressChanged(object sender, DownloadProgressChangedEventArgs e)
+        {
+            // Calculate download speed and output it to labelSpeed.
+            downloadLabel.Text = string.Format("{0} kb/s", (e.BytesReceived / 1024d / sw.Elapsed.TotalSeconds).ToString("0.00"));
+
+            // Update the progressbar percentage only when the value is not the same.
+            progressBar1.Value = e.ProgressPercentage;
+
+            // Show the percentage on our label.
+            percLabel.Text = e.ProgressPercentage.ToString() + "%";
+
+            // Update the label with how much data have been downloaded so far and the total size of the file we are currently downloading
+            downloadLabel.Text += " " + string.Format("{0} MB's / {1} MB's",
+                (e.BytesReceived / 1024d / 1024d).ToString("0.00"),
+                (e.TotalBytesToReceive / 1024d / 1024d).ToString("0.00"));
+        }
+
+        // The event that will trigger when the WebClient is completed
+        private void Completed(object sender, AsyncCompletedEventArgs e)
+        {
+            // Reset the stopwatch.
+            sw.Reset();
+
+            ZipFile.ExtractToDirectory(path + "mods.zip", path);
+
+            File.Delete(path + "mods.zip");
+
+            ftpResponseList = File.ReadAllText(path + "mdp.txt");
+
+            MessageBox.Show("Le mot de passe pour se connecter au serveur : " + ftpResponseList, "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+            Process.Start(path + "..\\" + "7DaysToDie_EAC.exe");
+
+            Application.Exit();
         }
     }
 }
