@@ -22,7 +22,7 @@ namespace EmpireLauncher7DTD
         public Stream responseStream;
         public StreamReader responseStreamReader;
         public Stopwatch sw = new Stopwatch();
-        public string urlAddress = "http://iazlur.fr/mods.zip";
+        public string urlAddress = "http://files.iazlur.fr/mods.zip";
 
         public LauncherEmpire()
         {
@@ -36,6 +36,8 @@ namespace EmpireLauncher7DTD
             percLabel.Parent = pictureBox1;
             label1.BackColor = Color.Transparent;
 
+            MessageBox.Show("Veuillez ne pas stopper le logiciel même s'il semble s'être arrêté.", "Réussite", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
             if (Directory.Exists(Directory.GetCurrentDirectory() + "\\mods") && 
                 File.Exists(Directory.GetCurrentDirectory() + "\\mods\\mdp.txt"))
             {
@@ -43,7 +45,7 @@ namespace EmpireLauncher7DTD
 
                 using (var client = new WebClient())
                 {
-                    client.DownloadFile("http://iazlur.fr/mdp.txt", Directory.GetCurrentDirectory() + "\\mods\\temp.txt");
+                    client.DownloadFile("http://files.iazlur.fr/mdp.txt", Directory.GetCurrentDirectory() + "\\mods\\temp.txt");
                 }
 
                 string pass2 = File.ReadAllText(Directory.GetCurrentDirectory() + "\\mods\\temp.txt");
@@ -79,7 +81,7 @@ namespace EmpireLauncher7DTD
             }
             else
             {
-                MessageBox.Show("Vous devez d'abord choisir dans quel dossier votre jeu est installé.", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Vous devez d'abord choisir dans quel dossier votre jeu est installé.", "Réussite", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 Verify();
             }
         }
